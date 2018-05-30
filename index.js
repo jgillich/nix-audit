@@ -13,7 +13,7 @@ function packages(cb) {
     .pipe(zlib.createUnzip())
     .on('data', (chunk) => data += chunk)
     .on('error', onError)
-    .on('end', () => cb(JSON.parse(data)));
+    .on('end', () => cb(JSON.parse(data).packages));
 }
 
 function scan(packages, year, cb) {
@@ -60,6 +60,6 @@ function onError(err) {
 }
 
 packages(function(packages) {
-  let years = [2010, 2011, 2012, 2013, 2014, 2015];
+  let years = [2014, 2015, 2016, 2017, 2018];
   async.mapSeries(years, scan.bind(null, packages), onError);
 });
